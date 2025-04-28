@@ -7,7 +7,6 @@ const VoucherPage = () => {
   return (
     <Container>
       <BreadCrumb currentPageTitle={"Voucher Module"} />
-      {/* <h1>Voucher Module</h1> */}
       <VoucherList />
     </Container>
   )

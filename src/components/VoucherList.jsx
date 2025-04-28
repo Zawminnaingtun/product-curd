@@ -1,8 +1,13 @@
 import React from 'react'
 import { HiSearch } from "react-icons/hi";
-import { HiOutlinePencil, HiOutlineTrash, HiPlus } from "react-icons/hi2";
+import { HiOutlinePencil, HiOutlineTrash, HiPlus, HiMiniComputerDesktop } from "react-icons/hi2";
+import useSWR from 'swr';
+import VoucherListRow from './VoucherListRow';
+import { Link } from 'react-router-dom';
 
 const VoucherList = () => {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+  const {data, isLoading, error} = useSWR(import.meta.env.VITE_API_URL + '/vouchers', fetcher)
   return (
     <>
           <div className="flex justify-between mb-3">
@@ -19,28 +24,28 @@ const VoucherList = () => {
                 />
               </div>
             </div>
-            <div className="">
+            <Link to={`/sale`} className="">
               <button
                 type="submit"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex justify-center items-center"
               >
-                Add New Product
-                <HiPlus className="ms-2" />
+                Create Sale
+                <HiMiniComputerDesktop className="ms-2" />
               </button>
-            </div>
+            </Link>
           </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    #
+                    # Voucher_ID
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Product name
+                    Customer name
                   </th>
                   <th scope="col" className="px-6 py-3 text-end">
-                    Price
+                    Customer Email
                   </th>
                   <th scope="col" className="px-6 py-3 text-end">
                     Created At
@@ -60,42 +65,9 @@ const VoucherList = () => {
                     There is no Product!
                   </td>
                 </tr>
-                <tr className="odd:bg-white  even:bg-gray-50  border-b  border-gray-200">
-                  <td
-                    scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap"
-                  >
-                    1
-                  </td>
-                  <td
-                    scope="row"
-                    className="px-6 py-4 font-medium whitespace-nowrap"
-                  >
-                    Apple MacBook Pro 17"
-                  </td>
-                  <td className="px-6 py-4 text-end">$2999</td>
-                  <td className="px-6 py-4 text-end">
-                    <p className="text-sm">7-Sep-2022</p>
-                    <p className="text-sm">10:30 AM</p>
-                  </td>
-                  <td className="px-6 py-4 text-end">
-                    <div className="inline-flex rounded-md shadow-xs" role="group">
-                      <button
-                        type="button"
-                        className="px-4 py-2 text-sm font-medium text-red-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 "
-                      >
-                        <HiOutlinePencil />
-                      </button>
-    
-                      <button
-                        type="button"
-                        className="px-4 py-2 text-sm font-medium text-red-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 "
-                      >
-                        <HiOutlineTrash />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {!isLoading && data.map((voucher, index) => (
+                  <VoucherListRow key={index} voucher={voucher} index={index} />
+              ))}
               </tbody>
             </table>
           </div>

@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import 'flowbite';
 import { RouterProvider } from 'react-router-dom';
-import router from './stores/router.jsx';
+import router from './router/router.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

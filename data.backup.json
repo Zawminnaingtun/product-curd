@@ -60,5 +60,154 @@
               "price": 500,
               "created_at": "2023-12-05T17:45:00Z"
           }
-      ]
+      ],
+    "vouchers": [
+    {
+      "voucher_id": "INV-20250426-6529",
+      "customer_name": "Zaw Min Naing Tun",
+      "customer_email": "a@gmail.com",
+      "sale_date": "2025-04-26",
+      "all_correct": "true",
+      "records": [
+        {
+          "id": 1745678484923,
+          "product": {
+            "id": 2,
+            "product_name": "Website Design Service",
+            "price": 500,
+            "created_at": "2023-02-10T09:00:00Z"
+          },
+          "quantity": "10",
+          "cost": 5000,
+          "created_at": "2025-04-26T14:41:24.923Z"
+        },
+        {
+          "id": 1745678491064,
+          "product": {
+            "id": 4,
+            "product_name": "Backend API Development",
+            "price": 1200,
+            "created_at": "2023-06-01T11:45:00Z"
+          },
+          "quantity": "30",
+          "cost": 36000,
+          "created_at": "2025-04-26T14:41:31.064Z"
+        },
+        {
+          "id": 1745678498595,
+          "product": {
+            "id": 7,
+            "product_name": "Web Hosting Configuration",
+            "price": 180,
+            "created_at": "2023-09-12T10:20:00Z"
+          },
+          "quantity": "50",
+          "cost": 9000,
+          "created_at": "2025-04-26T14:41:38.595Z"
+        }
+      ],
+      "total": 50000,
+      "tax": 2500,
+      "grandTotal": 52500,
+      "id": 1
+    },
+    {
+      "voucher_id": "INV-20250426-2543",
+      "customer_name": "Zaw Min Naing Tun",
+      "customer_email": "a@gmail.com",
+      "sale_date": "2025-04-26",
+      "all_correct": "true",
+      "records": [
+        {
+          "id": 1745678959760,
+          "product": {
+            "id": 3,
+            "product_name": "Responsive Frontend Development",
+            "price": 850,
+            "created_at": "2023-04-15T14:30:00Z"
+          },
+          "quantity": "10",
+          "cost": 8500,
+          "created_at": "2025-04-26T14:49:19.760Z"
+        },
+        {
+          "id": 1745678968774,
+          "product": {
+            "id": 1,
+            "product_name": "SEO Optimization Service",
+            "price": 100,
+            "created_at": "2022-01-01T16:20:00Z"
+          },
+          "quantity": "20",
+          "cost": 2000,
+          "created_at": "2025-04-26T14:49:28.774Z"
+        },
+        {
+          "id": 1745678977950,
+          "product": {
+            "id": 2,
+            "product_name": "Website Design Service",
+            "price": 500,
+            "created_at": "2023-02-10T09:00:00Z"
+          },
+          "quantity": "30",
+          "cost": 15000,
+          "created_at": "2025-04-26T14:49:37.950Z"
+        }
+      ],
+      "total": 25500,
+      "tax": 1275,
+      "grandTotal": 26775,
+      "id": 2
+    },
+    {
+      "voucher_id": "INV-20250426-4978",
+      "customer_name": "zaw zaw",
+      "customer_email": "zaw@gmail.com",
+      "sale_date": "2025-04-26",
+      "all_correct": "true",
+      "records": [
+        {
+          "id": 1745679108758,
+          "product": {
+            "id": 1,
+            "product_name": "SEO Optimization Service",
+            "price": 100,
+            "created_at": "2022-01-01T16:20:00Z"
+          },
+          "quantity": "5",
+          "cost": 500,
+          "created_at": "2025-04-26T14:51:48.758Z"
+        },
+        {
+          "id": 1745679117713,
+          "product": {
+            "id": 2,
+            "product_name": "Website Design Service",
+            "price": 500,
+            "created_at": "2023-02-10T09:00:00Z"
+          },
+          "quantity": "6",
+          "cost": 3000,
+          "created_at": "2025-04-26T14:51:57.713Z"
+        },
+        {
+          "id": 1745679137957,
+          "product": {
+            "id": 3,
+            "product_name": "Responsive Frontend Development",
+            "price": 850,
+            "created_at": "2023-04-15T14:30:00Z"
+          },
+          "quantity": "4",
+          "cost": 3400,
+          "created_at": "2025-04-26T14:52:17.957Z"
+        }
+      ],
+      "total": 6900,
+      "tax": 345,
+      "grandTotal": 7245,
+      "id": 3
+    }
+  ]
   }

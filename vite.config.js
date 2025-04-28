@@ -9,4 +9,8 @@ export default defineConfig({
     sans:['Montserrat', 'Padauk']
   },
   plugins: [react(),tailwindcss()],
+//api integration for not refresh loading
+  server: {  
+    hmr: false,
+  },
 })

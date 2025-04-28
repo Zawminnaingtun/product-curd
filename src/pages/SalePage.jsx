@@ -1,12 +1,13 @@
 import React from 'react'
 import BreadCrumb from '../components/BreadCrumb'
 import Container from '../components/Container'
+import VoucherInfo from '../components/VoucherInfo'
 
 const SalePage = () => {
   return (
     <Container>
       <BreadCrumb currentPageTitle={"Sale Module"} />
-      <h1>Sale Module</h1>
+      <VoucherInfo />
     </Container>
   )
 }

@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { HiOutlinePencil, HiOutlineTrash, HiPlus } from "react-icons/hi2";
 import { useSWRConfig } from "swr";
+import { Link } from "react-router-dom";
+import ShowDate from "./ShowDate";
 import { dotPulse } from "ldrs";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 dotPulse.register();
 
 const ProductRow = ({ product: { id, product_name, price, created_at } }) => {
   const { mutate } = useSWRConfig();
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const date = new Date(created_at);
-  const day = date.getUTCDate();
-  const month = date.toLocaleString("en-GB", {
-    month: "short",
-    timeZone: "UTC",
-  });
-  const year = date.getUTCFullYear();
+  // const date = new Date(created_at);
+  // const day = date.getUTCDate();
+  // const month = date.toLocaleString("en-GB", {
+  //   month: "short",
+  //   timeZone: "UTC",
+  // });
+  // const year = date.getUTCFullYear();
 
-  const currentDate = `${day} ${month} ${year}`;
-  const currentTime = date.toLocaleTimeString();
+  // const currentDate = `${day} ${month} ${year}`;
+  // const currentTime = date.toLocaleTimeString();
 
   const handleDeleteBtn = async () => {
     setIsDeleting(true);
@@ -29,6 +30,7 @@ const ProductRow = ({ product: { id, product_name, price, created_at } }) => {
 
     mutate(import.meta.env.VITE_API_URL + "/products");
     // console.log(id)
+    setIsDeleting(false);
     toast.success("Product Deleted Successfully");
   };
 
@@ -42,8 +44,9 @@ const ProductRow = ({ product: { id, product_name, price, created_at } }) => {
       </td>
       <td className="px-6 py-4 text-end">${price}</td>
       <td className="px-6 py-4 text-end">
-        <p className="text-sm">{currentDate}</p>
-        <p className="text-sm">{currentTime}</p>
+        {/* <p className="text-sm">{currentDate}</p>
+        <p className="text-sm">{currentTime}</p> */}
+        <ShowDate timestamp={created_at}/>
       </td>
       <td className="px-6 py-4 text-end">
         <div className="inline-flex rounded-md shadow-xs" role="group">
