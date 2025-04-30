@@ -11,9 +11,9 @@ const Header = () => {
         <h1 className='font-bold text-2xl'>Voucher App</h1>
         <p className='text-stone-500'>MMS Software</p>
         </div>
-        <div className="">
+        {/* <div className="">
         <img src={me} alt="me" className='w-16 h-16 rounded-lg' />
-        </div>
+        </div> */}
       </div>
       </Container>
     </header>

@@ -100,7 +100,9 @@ const ProductCreateCard = () => {
             <input
               type="checkbox"
               id="all_correct"
-              {...register("all_correct")}
+              {...register("all_correct",{
+                required: true,
+              })}
               defaultValue
               className="size-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm "
             />

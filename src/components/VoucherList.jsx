@@ -1,13 +1,37 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { HiSearch } from "react-icons/hi";
 import { HiOutlinePencil, HiOutlineTrash, HiPlus, HiMiniComputerDesktop } from "react-icons/hi2";
 import useSWR from 'swr';
 import VoucherListRow from './VoucherListRow';
 import { Link } from 'react-router-dom';
+import VoucherListSkeletonLoader from './VoucherListSkeletonLoader';
+import { debounce, throttle } from 'lodash';
+import { HiXMark } from "react-icons/hi2";
+
 
 const VoucherList = () => {
+  const [search, setSearch] =useState()
+  const searchInput = useRef("")
+  // console.log((searchInput))
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const {data, isLoading, error} = useSWR(import.meta.env.VITE_API_URL + '/vouchers', fetcher)
+  const {data, isLoading, error} = useSWR(
+    search ? `${import.meta.env.VITE_API_URL}/vouchers?voucher_id_like=${search}` : `${import.meta.env.VITE_API_URL}/vouchers`
+    , fetcher)
+  // console.log(search)
+
+  // throttle & debounce => lodash
+  // const handleSearch = (e) => {
+  //   setSearch(e.target.value)
+  //   console.log(e.target.value)
+  // }
+  const handleSearch = debounce((e)=> {
+    setSearch(e.target.value)
+    // console.log(e.target.value)
+  }, 500)
+  const handleClearSearch = () => {
+    setSearch("")
+    searchInput.current.value = ""
+  }
   return (
     <>
           <div className="flex justify-between mb-3">
@@ -17,11 +41,16 @@ const VoucherList = () => {
                   <HiSearch />
                 </div>
                 <input
+                  ref={searchInput}
+                onChange={handleSearch}
                   type="text"
                   id="input-group-1"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  "
                   placeholder="Search Product"
                 />
+                {search && <button onClick={handleClearSearch} className="absolute inset-y-0 end-0 flex items-center pe-3 text-gray-500 hover:text-gray-700 cursor-pointer">
+                  <HiXMark className='scale-100 active:scale-50 duration-100'/>
+                </button>}
               </div>
             </div>
             <Link to={`/sale`} className="">
@@ -62,9 +91,10 @@ const VoucherList = () => {
                     scope="row"
                     className="px-6 py-4 font-medium whitespace-nowrap text-center"
                   >
-                    There is no Product!
+                    There is no Voucher!
                   </td>
                 </tr>
+                {isLoading && <VoucherListSkeletonLoader />}
                 {!isLoading && data.map((voucher, index) => (
                   <VoucherListRow key={index} voucher={voucher} index={index} />
               ))}

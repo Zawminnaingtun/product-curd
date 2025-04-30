@@ -24,18 +24,25 @@ const VoucherInfo = () => {
     const tax = total * 0.05;
     const grandTotal = total + tax;
     const currentVoucher =({ ...data, records, total, tax, grandTotal });
-    await fetch(import.meta.env.VITE_API_URL + "/vouchers",{
+    const res = await fetch(import.meta.env.VITE_API_URL + "/vouchers",{
       method: "POST",
       body: JSON.stringify(currentVoucher),
       headers:{
         "Content-Type" : "application/json"
       }
     })
+    const json = await res.json();
+    console.log(json)
+
+
     resetRecord();
     reset();
     toast.success("Voucher Created Successfully");
     setIsSending(false);
     navigate("/voucher")
+    if(data.redirect_to_voucher_detail){
+      navigate(`/voucher/detail/${json.id}`)
+    }
   };
 
   function generateInvoiceNumber() {
@@ -49,7 +56,9 @@ const VoucherInfo = () => {
   //   console.log(generateInvoiceNumber())
 
   return (
-    <div>
+    <div className="">
+      {/* <div className="grid grid-cols-3"></div>
+      <div className="grid grid-cols-1"></div> */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-stone-100 p-5 rounded-lg w-full mb-5"
@@ -187,8 +196,32 @@ const VoucherInfo = () => {
       </form>
       <SaleForm />
       <VoucherTable />
-      <div className="flex justify-end items-center mt-3">
-        <div className="flex items-center">
+      <div className="flex flex-col justify-end items-end mt-3">
+        <div className="flex items-center mb-3">
+          
+          <label
+            htmlFor="redirect_to_voucher_detail"
+            className="mx-3 text-sm font-medium text-gray-600"
+          >
+            Redirect to Voucher Detail
+          </label>
+          <input
+            type="checkbox"
+            id="redirect_to_voucher_detail"
+            form="infoForm"
+            {...register("redirect_to_voucher_detail")}
+            defaultValue
+            className="size-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm "
+          />
+        </div>
+        <div className="flex items-center mb-3">
+          
+          <label
+            htmlFor="all_correct"
+            className="mx-3 text-sm font-medium text-gray-600"
+          >
+            Make sure all fields are correct
+          </label>
           <input
             type="checkbox"
             id="all_correct"
@@ -197,12 +230,6 @@ const VoucherInfo = () => {
             defaultValue
             className="size-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm "
           />
-          <label
-            htmlFor="all_correct"
-            className="mx-3 text-sm font-medium text-gray-600"
-          >
-            Make sure all fields are correct
-          </label>
         </div>
         <button
           form="infoForm"

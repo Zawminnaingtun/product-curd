@@ -43,6 +43,10 @@ import ProductEditPage from "../pages/ProductEditPage";
                 path: "/sale",
                 element: <SalePage />,
             },
+            {
+                path: "/voucher/detail/:id",
+                element: <VoucherDetailPage  />,
+            },
         ],
     }
  ])

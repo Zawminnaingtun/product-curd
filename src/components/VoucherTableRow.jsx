@@ -14,8 +14,10 @@ const VoucherTableRow = ({record:{id,cost,quantity, product:{product_name, price
     toast.success("Product quantity increased successfully")
   }
   const handleRemove = () => {
-    changeQuantity(id, -1)
-    toast.success("Product quantity decreased successfully")
+    if(quantity > 0){
+      changeQuantity(id, -1)
+      toast.success("Product quantity decreased successfully")
+    }
   }
   return (
     <tr className="group odd:bg-white  even:bg-gray-50  border-b">
